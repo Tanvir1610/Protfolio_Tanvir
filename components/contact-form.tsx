@@ -38,7 +38,7 @@ export function ContactForm() {
   }
 
   return (
-    <form onSubmit={onSubmit} action={'https://formspree.io/f/mzzavaav'} method="POST" className="space-y-4">
+    <form action={'https://formspree.io/f/mzzavaav'} method="POST" className="space-y-4">
       <div className="grid gap-2">
         <Label htmlFor="name">Name</Label>
         <Input id="name" required value={name} onChange={(e) => setName(e.target.value)} placeholder="Your name" />
