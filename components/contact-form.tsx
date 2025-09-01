@@ -13,28 +13,28 @@ export function ContactForm() {
   const [loading, setLoading] = useState(false)
   const [status, setStatus] = useState<null | { ok: boolean; msg: string }>(null)
 
-  async function onSubmit(e: React.FormEvent) {
-    e.preventDefault()
-    setLoading(true)
-    setStatus(null)
-    try {
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, message }),
-      })
-      const data = await res.json()
-      if (!res.ok) throw new Error(data?.error || "Failed to submit")
-      setStatus({ ok: true, msg: "Thanks! I’ll get back to you soon." })
-      setName("")
-      setEmail("")
-      setMessage("")
-    } catch (err: any) {
-      setStatus({ ok: false, msg: err.message || "Something went wrong" })
-    } finally {
-      setLoading(false)
-    }
-  }
+  // async function onSubmit(e: React.FormEvent) {
+  //   e.preventDefault()
+  //   setLoading(true)
+  //   setStatus(null)
+  //   try {
+  //     const res = await fetch("/api/contact", {
+  //       method: "POST",
+  //       headers: { "Content-Type": "application/json" },
+  //       body: JSON.stringify({ name, email, message }),
+  //     })
+  //     const data = await res.json()
+  //     if (!res.ok) throw new Error(data?.error || "Failed to submit")
+  //     setStatus({ ok: true, msg: "Thanks! I’ll get back to you soon." })
+  //     setName("")
+  //     setEmail("")
+  //     setMessage("")
+  //   } catch (err: any) {
+  //     setStatus({ ok: false, msg: err.message || "Something went wrong" })
+  //   } finally {
+  //     setLoading(false)
+  //   }
+  // }
 
   return (
     <form action={'https://formspree.io/f/mzzavaav'} method="POST" className="space-y-4">
