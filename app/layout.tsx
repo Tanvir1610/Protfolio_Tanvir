@@ -1,26 +1,29 @@
-import type { Metadata } from 'next'
-import { GeistSans } from 'geist/font/sans'
-import { GeistMono } from 'geist/font/mono'
-import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
+import type { Metadata } from 'next'
+import { Inter } from 'next/font/google'
+
+const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'v0 App',
-  description: 'Created with v0',
-  generator: 'v0.app',
+  title: 'Tanvir Vhora - Full Stack Developer & UI/UX Designer',
+  description: 'Portfolio of Tanvir Vhora - Full Stack Developer specializing in React, Next.js, and UI/UX Design. Building beautiful and responsive web applications.',
+  keywords: ['Tanvir Vhora', 'Full Stack Developer', 'UI/UX Designer', 'React', 'Next.js', 'Web Developer', 'Portfolio'],
+  authors: [{ name: 'Tanvir Vhora' }],
+  openGraph: {
+    title: 'Tanvir Vhora - Full Stack Developer & UI/UX Designer',
+    description: 'Portfolio showcasing web development and UI/UX design projects',
+    type: 'website',
+  },
 }
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode
-}>) {
+}) {
   return (
-    <html lang="en">
-      <body className={`font-sans ${GeistSans.variable} ${GeistMono.variable}`}>
-        {children}
-        <Analytics />
-      </body>
+    <html lang="en" suppressHydrationWarning>
+      <body className={inter.className}>{children}</body>
     </html>
   )
 }
