@@ -1,20 +1,10 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Moon, Sun, Github, Linkedin, Mail, Phone, MapPin, ExternalLink, Award, Briefcase, GraduationCap, Code } from 'lucide-react';
+import { Moon, Sun, Github, Linkedin, Mail, Phone, MapPin, Award, Briefcase, GraduationCap, Code } from 'lucide-react';
 
 export default function Portfolio() {
   const [darkMode, setDarkMode] = useState(false);
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: ''
-  });
-  const [formStatus, setFormStatus] = useState<{type: 'success' | 'error' | '', message: string}>({
-    type: '',
-    message: ''
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     const isDark = localStorage.getItem('darkMode') === 'true';
@@ -30,51 +20,6 @@ export default function Portfolio() {
       localStorage.setItem('darkMode', 'false');
     }
   }, [darkMode]);
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    setFormStatus({ type: '', message: '' });
-
-    try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-
-      const data = await response.json();
-
-      if (response.ok) {
-        setFormStatus({
-          type: 'success',
-          message: 'Thank you! Your message has been sent successfully.'
-        });
-        setFormData({ name: '', email: '', message: '' });
-      } else {
-        setFormStatus({
-          type: 'error',
-          message: data.error || 'Failed to send message. Please try again.'
-        });
-      }
-    } catch (error) {
-      setFormStatus({
-        type: 'error',
-        message: 'An error occurred. Please try again later.'
-      });
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
 
   const experiences = [
     {
@@ -124,31 +69,31 @@ export default function Portfolio() {
       name: "GCET Connection",
       tech: "Next.js, Supabase",
       description: "Social network for GCET students with posts, reels, and messaging",
-      github: "#"
+      github: "https://github.com/Tanvir1610"
     },
     {
       name: "Nutrition Management System",
       tech: "HTML, CSS, JavaScript",
       description: "Web app for managing nutrition records with calculator & animated UI",
-      github: "#"
+      github: "https://github.com/Tanvir1610"
     },
     {
       name: "CodewithTanvir – Learn Coding",
       tech: "Interactive Platform",
       description: "Interactive platform to learn C, C++, Python, Java, JavaScript, HTML & CSS",
-      github: "#"
+      github: "https://github.com/Tanvir1610"
     },
     {
       name: "NeuroLm",
       tech: "AI/ML",
       description: "AI/ML mini-project for Brain Tumor prediction and management",
-      github: "#"
+      github: "https://github.com/Tanvir1610"
     },
     {
       name: "Alpha Athlete",
       tech: "E-commerce",
       description: "E-commerce landing page with dynamic UI and interactivity",
-      github: "#"
+      github: "https://github.com/Tanvir1610"
     }
   ];
 
@@ -312,7 +257,7 @@ export default function Portfolio() {
               </div>
             </div>
             <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
-              <h4 className="text-lg font-bold text-gray-900 dark:text-white mb-4">Databases</h4>
+              <h4 className="text-lg font-bold text-gray-900 dark:text-white mb-4">Database Management</h4>
               <div className="flex flex-wrap gap-2">
                 {skills.databases.map((skill, idx) => (
                   <span key={idx} className="px-4 py-2 bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 rounded-full text-sm font-semibold">
@@ -382,97 +327,31 @@ export default function Portfolio() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-16 bg-white dark:bg-gray-800">
+      <section className="py-16 bg-white dark:bg-gray-800">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-center gap-3 mb-12">
             <Mail className="w-8 h-8 text-blue-600 dark:text-blue-400" />
             <h3 className="text-3xl font-bold text-gray-900 dark:text-white">Get In Touch</h3>
           </div>
-          <div className="max-w-2xl mx-auto">
-            <form onSubmit={handleSubmit} className="bg-gray-50 dark:bg-gray-900 rounded-lg p-8 shadow-lg border border-gray-200 dark:border-gray-700">
-              <div className="mb-6">
-                <label htmlFor="name" className="block text-gray-700 dark:text-gray-300 font-semibold mb-2">
-                  Your Name
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleInputChange}
-                  required
-                  className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-colors"
-                  placeholder="John Doe"
-                />
-              </div>
-              <div className="mb-6">
-                <label htmlFor="email" className="block text-gray-700 dark:text-gray-300 font-semibold mb-2">
-                  Your Email
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleInputChange}
-                  required
-                  className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-colors"
-                  placeholder="john@example.com"
-                />
-              </div>
-              <div className="mb-6">
-                <label htmlFor="message" className="block text-gray-700 dark:text-gray-300 font-semibold mb-2">
-                  Your Message
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  value={formData.message}
-                  onChange={handleInputChange}
-                  required
-                  rows={5}
-                  className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-colors resize-none"
-                  placeholder="Your message here..."
-                />
-              </div>
-              
-              {formStatus.message && (
-                <div className={`mb-6 p-4 rounded-lg ${
-                  formStatus.type === 'success' 
-                    ? 'bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200' 
-                    : 'bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200'
-                }`}>
-                  {formStatus.message}
-                </div>
-              )}
-
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="w-full px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-semibold disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
-              >
-                {isSubmitting ? (
-                  <>
-                    <span className="animate-spin">⏳</span>
-                    Sending...
-                  </>
-                ) : (
-                  <>
-                    <Mail className="w-5 h-5" />
-                    Send Message
-                  </>
-                )}
-              </button>
-            </form>
-            
-            <div className="mt-8 text-center">
-              <p className="text-gray-600 dark:text-gray-400 mb-4">Or reach me directly:</p>
-              <div className="flex flex-col gap-2">
-                <a href="mailto:vhoratanvir1610@gmail.com" className="text-blue-600 dark:text-blue-400 hover:underline">
-                  vhoratanvir1610@gmail.com
+          <div className="max-w-2xl mx-auto text-center">
+            <p className="text-lg text-gray-700 dark:text-gray-300 mb-8">
+              I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.
+            </p>
+            <div className="flex flex-col gap-4">
+              <a href="mailto:vhoratanvir1610@gmail.com" className="flex items-center justify-center gap-2 text-blue-600 dark:text-blue-400 hover:underline text-lg">
+                <Mail className="w-5 h-5" />
+                vhoratanvir1610@gmail.com
+              </a>
+              <a href="tel:+916354686821" className="flex items-center justify-center gap-2 text-blue-600 dark:text-blue-400 hover:underline text-lg">
+                <Phone className="w-5 h-5" />
+                +91 6354686821
+              </a>
+              <div className="flex justify-center gap-6 mt-4">
+                <a href="https://github.com/Tanvir1610" target="_blank" rel="noopener noreferrer" className="p-3 bg-gray-100 dark:bg-gray-700 rounded-full hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
+                  <Github className="w-6 h-6 text-gray-700 dark:text-gray-300" />
                 </a>
-                <a href="tel:+916354686821" className="text-blue-600 dark:text-blue-400 hover:underline">
-                  +91 6354686821
+                <a href="https://www.linkedin.com/in/tanvir-vhora" target="_blank" rel="noopener noreferrer" className="p-3 bg-gray-100 dark:bg-gray-700 rounded-full hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
+                  <Linkedin className="w-6 h-6 text-gray-700 dark:text-gray-300" />
                 </a>
               </div>
             </div>
